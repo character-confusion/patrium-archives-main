@@ -1,0 +1,4441 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Patrium Interactive - lore</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chatlog__reference-link:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="lore.html_Files/9b819ad7f12669e74179c7037ebd216b-867EF.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">Patrium Interactive</div>
+        <div class="preamble__entry">Official / lore</div>
+
+            <div class="preamble__entry preamble__entry--small">A document containing organized lore information is pinned.</div>
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">01-May-20 02:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="705893656133107802" id="message-705893656133107802">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Polcompball interactive is a community project attempting to simulate the semi-realistic political landscape of the fictional country known as the Republic of Patrium. However, not all is well in this parliamentary republic. President Adams, known for being someone of great compromise, is widely regarded as being the only thing keeping the country together. Economic stagnation and recent news of Adams’ failing health has raised questions as to whether civil war is on the horizon. As a prominent politician of the Republic of Patrium, you join a political party that aligns with the ideology of your choice in order to attempt to take charge of the nation. Will you lead Patrium back into stability and peace? Or will division triumph?
+
+The project will officially begin after May 16 and once we have a minimum of 25 members and 3 admins. The members, representing senators in the Patrium Senate, will be presented with weekly scenarios that their party must present a solution for. At the end of the week, the Senate will meet and vote on which idea they think is best. This choice will have consequences on the future of the nation. Depending on how the parties behave the nation can either peacefully select a new party/leader in time for when Adams dies or will dissolve into civil war. The mechanics of a civil war are still to be determined. Ultimately, each party’s goal should be to dominate the political affairs of the country by getting their legislation/ideas passed and ultimately to be in charge of the nation. Most of the project will take place on a discord server that is currently being organized, although we are considering creating a subreddit as well. Good luck!</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/35b9581e58690354e7ede274fb4f4b4d-6F88D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Arksiane#0142" data-user-id="203781815964532736" style="color: rgb(92,95,255)">Arksiane</span>
+
+
+        <span class="chatlog__timestamp">05-May-20 07:48 AM</span>
+
+            <div class="chatlog__message " data-message-id="707242216506261524" id="message-707242216506261524">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">A statue has been put up of General Wilkinkorf, due to his great military accomplishments.
+
+The statue reads : General &quot;Bronze-Boar&quot; Wilkinkorf. May he forever serve Patrium</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="thankspeaker" title="thankspeaker" src="lore.html_Files/706601915617902642-D3D24.png">
+                                <span class="chatlog__reaction-count">14</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">05-May-20 11:23 AM</span>
+
+            <div class="chatlog__message " data-message-id="707296451528491070" id="message-707296451528491070">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">On May 4 2020 Senator Armstrong died under mysterious circumstances, although it is widely speculated that he was assassinated.</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128064;" title="&#128064;" src="lore.html_Files/1f440-51DEA.png">
+                                <span class="chatlog__reaction-count">20</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128563;" title="&#128563;" src="lore.html_Files/1f633-F7868.png">
+                                <span class="chatlog__reaction-count">21</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128298;" title="&#128298;" src="lore.html_Files/1f52a-F16A8.png">
+                                <span class="chatlog__reaction-count">22</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="handwithgun" title="handwithgun" src="lore.html_Files/706477208981602324-5FA6C.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127466;" title="&#127466;" src="lore.html_Files/1f1ea-4B558.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127477;" title="&#127477;" src="lore.html_Files/1f1f5-E259F.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127480;" title="&#127480;" src="lore.html_Files/1f1f8-B6AC7.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127481;" title="&#127481;" src="lore.html_Files/1f1f9-24F03.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128231;" title="&#128231;" src="lore.html_Files/1f4e7-BFD2B.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127470;" title="&#127470;" src="lore.html_Files/1f1ee-B3C1F.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127475;" title="&#127475;" src="lore.html_Files/1f1f3-08F96.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#129532;" title="&#129532;" src="lore.html_Files/1f9fc-F3B2E.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/35b9581e58690354e7ede274fb4f4b4d-6F88D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Arksiane#0142" data-user-id="203781815964532736" style="color: rgb(92,95,255)">Arksiane</span>
+
+
+        <span class="chatlog__timestamp">05-May-20 11:30 AM</span>
+
+            <div class="chatlog__message " data-message-id="707298172174598144" id="message-707298172174598144">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The autopsy revealed a very odd thing. Senator Armstrong died with several grams of iodized table salt found inside his brain. Nobody knows the cause of this but it seems to have a correlation with his death</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#129474;" title="&#129474;" src="lore.html_Files/1f9c2-66497.png">
+                                <span class="chatlog__reaction-count">38</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="UASLball" title="UASLball" src="lore.html_Files/706750537164521502-D88E3.png">
+                                <span class="chatlog__reaction-count">11</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="⬅️" title="⬅️" src="lore.html_Files/2b05-0C4A2.png">
+                                <span class="chatlog__reaction-count">6</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="thankspeaker" title="thankspeaker" src="lore.html_Files/706601915617902642-D3D24.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="MountKushmore" title="MountKushmore" src="lore.html_Files/707170200650252369-2044E.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="the_league_of_the_left" title="the_league_of_the_left" src="lore.html_Files/706805772364808283-46022.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127474;" title="&#127474;" src="lore.html_Files/1f1f2-C2511.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127476;" title="&#127476;" src="lore.html_Files/1f1f4-6C4DE.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="Ⓜ️" title="Ⓜ️" src="lore.html_Files/24c2-E0F92.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127466;" title="&#127466;" src="lore.html_Files/1f1ea-4B558.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127475;" title="&#127475;" src="lore.html_Files/1f1f3-08F96.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127481;" title="&#127481;" src="lore.html_Files/1f1f9-24F03.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">07-May-20 07:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="708148426256416838" id="message-708148426256416838">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Background History: The small continent of Jazira was left largely uninhabited by
+humans for centuries. In the rest of the world, empires of legend would rise and fall, cultures would grow and prosper, but Jazira would remain the same: isolated and devoid of human contact. Only until the 14th century would Arab traders and their slaves inhabit the northern regions of the continent. However, the nearly impenetrable jungles of the north and western coasts of the massive island would prevent them from going any further inland. These trade posts would develop into the first cities and were eventually seized by Portueguese explorers in the 15th century.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="708148478441685001" id="message-708148478441685001">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">This would result in the first introduction of European culture to the landmass, although the Arabic language and its customs would remain relevant for the following centuries. When the very young portuguese king, Sebasti&#227;o, died in a battle without heirs, in the 16th century, the trade cities became colonies of the Spanish, although this would not last for long. After the Anglo-Spanish War of 1585-1604 ended in English victory, Jazira fell under the dominion of the English. Sir Byron Ashworth would serve as governor of the newly named “Dominion of Patrium” following the English victory. As governor, Ashworth would claim the entire continent in the name of the English crown, although very little of the island was truly under his control. However, Ashworth would still demonstrate himself as a capable leader and under his governance, Patrium would flourish.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="708148533949104160" id="message-708148533949104160">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The Continent was divided into 12 provinces, each consisting of a particular group, religion, or culture that inhabited the region. To the west were the portueguese provinces of: Selva, Beleza, and Ilha-Phillip. To the north were the Arabic and Sunni provinces of: Jazira, Altijaria, and daw’ alqamar. The remaining 6 provinces: Victoria, Ashworth, Patrium, Thuzland, Osea, and Glaicia, were predominantly of English and Spanish origin. These various groups were prone to constant infighting which would eventually escalate into civil war with the outbreak of the great depression in 1929. After 4 years of fighting, and over a million dead, the continent would be divided into 4. Jazira in the north, the Republic of Selva to the west, and Thuzland and the Republic of Patrium to the South. Thuzland and Patrium would have a particularly serious rivalry even after the end of the civil war. Thuzland had been settled predominantly by Catholics both of English and Spanish origin while Patrium had a majority of English Protestants.</span>
+
+                                <span class="chatlog__edited-timestamp" title="07-May-20 08:02 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="708148569340903427" id="message-708148569340903427">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">This tension between the nations can still be felt today and there are often border skirmishes every few years. Today, the nations of Patrium, Jazira, and Selva have relatively friendly relations although it could be said that Thuzland is the only true ally of the Selvan Republic (both are very Catholic).</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="708148661439168512" id="message-708148661439168512">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">-----------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="708148725754626130" id="message-708148725754626130">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Country Status and Government: 
+Jazira, while relatively small with regards to population, is known for its significant wealth in natural resources and minerals. Its economy could be said to be relatively similar to that of the nations of the Arabian Peninsula and Africa. While it is a constitutional republic, there has been increasing tension between the secular population and the increasing Islamic fundamentalists. While many western nations greatly exaggerate the influence of said theocrats, their presence is growing in numbers.</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-May-20 04:10 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="708148744213889034" id="message-708148744213889034">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">-----------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="708148793983631370" id="message-708148793983631370">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Selva is one of the few, if only, true successful nations that emerged from the civil war in 1934. It has close ties with both the United Kingdom and Portugal and was even able to use the Second World War as a means of propping its economy back up. Today, it is a relatively wealthy and industrious nation adored by many across the world.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="708148810655989791" id="message-708148810655989791">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">-----------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="708148848195010591" id="message-708148848195010591">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">If Selva is the golden child of the island, Thuzland is the awkward and edgy disappointment of the family. Following the civil war in 1934, the government of Thuzland was overthrown by a military coup led by General Samuel Hopkins. A devout Catholic, Hopkins transformed the nation into a Catholic Theocracy with stratocratic elements. Even today, little is known about what truly happens within the nation and it is often referred to as  “God’s Hermit Kingdom.” From the stories of those that have escaped the nation, it has been described as a nation wide military-esque Catholic cult with serious human rights abuses and near-totalitarian control over its people.</span>
+
+                                <span class="chatlog__edited-timestamp" title="07-May-20 07:58 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="ANGRYADAMSball" title="ANGRYADAMSball" src="lore.html_Files/706726025450749965-5D6CF.png">
+                                <span class="chatlog__reaction-count">15</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="based" title="based" src="lore.html_Files/782838526907252757-0408C.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="BASED" title="BASED" src="lore.html_Files/714182528721748078-2CDDA.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="708148866436038697" id="message-708148866436038697">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">-----------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="708148901492031558" id="message-708148901492031558">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">In contrast, Patrium had a significant secular movement following the civil war. In fact, it was first controlled by the so-called “People’s Socialist Party” for nearly three decades from 1932 to 1951 which emphasized the separation of church and state in the country. However, Patrium is widely regarded as the most politically diverse nation in the entire world. One may find an avid Communist one minute and in the next speak with a staunch free market capitalist. While the nation is quite proud of its title, it has ironically been leading to its downfall as well. Of all the nations of the island, Patrium is by far the least politically stable. One can only wonder what will happen to the country next. (also note: Patrium is in fact a member of the commonwealth of nations as of 2002)</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-May-20 03:58 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128077;" title="&#128077;" src="lore.html_Files/1f44d-1485B.png">
+                                <span class="chatlog__reaction-count">24</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128525;" title="&#128525;" src="lore.html_Files/1f60d-9AF57.png">
+                                <span class="chatlog__reaction-count">20</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="ADAMSball" title="ADAMSball" src="lore.html_Files/706453646522712074-35D11.png">
+                                <span class="chatlog__reaction-count">7</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="begone" title="begone" src="lore.html_Files/706516598835642380-C63A5.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="708148918600597504" id="message-708148918600597504">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">-----------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">08-May-20 03:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="708444276312375347" id="message-708444276312375347">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/political_map-B6A81.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/political_map-B6A81.png" alt="Image attachment" title="Image: political_map.png (315.01 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="ADAMSball" title="ADAMSball" src="lore.html_Files/706453646522712074-35D11.png">
+                                <span class="chatlog__reaction-count">17</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128077;" title="&#128077;" src="lore.html_Files/1f44d-1485B.png">
+                                <span class="chatlog__reaction-count">24</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128078;" title="&#128078;" src="lore.html_Files/1f44e-1A8D9.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="708444450392637500" id="message-708444450392637500">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span> this is the map made by <span class="mention" title="ThomasTheDOOT#2218">@Rafa Telmo</span>. It is the canon map for Patrium</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127475;" title="&#127475;" src="lore.html_Files/1f1f3-08F96.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127476;" title="&#127476;" src="lore.html_Files/1f1f4-6C4DE.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127477;" title="&#127477;" src="lore.html_Files/1f1f5-E259F.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127470;" title="&#127470;" src="lore.html_Files/1f1ee-B3C1F.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127359;️" title="&#127359;️" src="lore.html_Files/1f17f-4B179.png">
+                                <span class="chatlog__reaction-count">7</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127358;️" title="&#127358;️" src="lore.html_Files/1f17e-78F24.png">
+                                <span class="chatlog__reaction-count">7</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127468;" title="&#127468;" src="lore.html_Files/1f1ec-E889A.png">
+                                <span class="chatlog__reaction-count">7</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127464;" title="&#127464;" src="lore.html_Files/1f1e8-D8C42.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127469;" title="&#127469;" src="lore.html_Files/1f1ed-AD677.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127462;" title="&#127462;" src="lore.html_Files/1f1e6-79872.png">
+                                <span class="chatlog__reaction-count">6</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127474;" title="&#127474;" src="lore.html_Files/1f1f2-C2511.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128525;" title="&#128525;" src="lore.html_Files/1f60d-9AF57.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">08-May-20 04:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="708455316265894010" id="message-708455316265894010">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">As of 2020, Patrium has a population of 31million people, the largest of the island. Jazira has 9million, Selva has 28 million people, Thuzland has  27million people. Most of the immigration coming into Patrium is from East Africa and the Middle East. Although there are individuals coming from SE Asia and a few from Thuzland.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">08-May-20 05:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="708472410608893992" id="message-708472410608893992">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Patrium&#39;s Main exports consist of: coffee, precious minerals and gems, fish, fruits, cereals, and ores</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-May-20 06:58 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">08-May-20 05:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="708474461598253126" id="message-708474461598253126">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Official History of the Jews on our island:  <a href="https://docs.google.com/document/d/13gKUdKESlt0X-QtMmR1RwzWRrpPzL5YPsqbSUfxkJuY/edit">https://docs.google.com/document/d/13gKUdKESlt0X-QtMmR1RwzWRrpPzL5YPsqbSUfxkJuY/edit</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://docs.google.com/document/d/13gKUdKESlt0X-QtMmR1RwzWRrpPzL5YPsqbSUfxkJuY/edit">
+                                                    <div class="markdown preserve-whitespace">Jews in Jazira</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">The first Jews arrived in Jazira in between 1457-1465, after the destruction of the old synagogue of Sanaa, largely from Yemen. It is estimated that about 400 Yemeni Jews arrived in Jayira in those years. They were accepted by the local Muslim population, although lived in a s...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="lore.html_Files/khBwWpA73iGdq1YRxn72z7hYnq9OmaNggeyTzw03ec-9ED59">
+                                            <img class="chatlog__embed-thumbnail" src="lore.html_Files/khBwWpA73iGdq1YRxn72z7hYnq9OmaNggeyTzw03ec-9ED59" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="ADMINball" title="ADMINball" src="lore.html_Files/707143182080802877-4DA51.png">
+                                <span class="chatlog__reaction-count">12</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">08-May-20 05:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="708478996878327858" id="message-708478996878327858">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Patrium uses the Indian Rupee as currency (we are allowed to print the Rupee) Technically there is also the Patrain Shaklh, but is largely worthless.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/20c0d3a68341c30b0e738ecb1f2c1c2a-4C671.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="FrogTheToad#8310" data-user-id="529550280258486282" style="color: rgb(84,110,122)">FrogTheToad</span>
+
+
+        <span class="chatlog__timestamp">08-May-20 05:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="708480289197916200" id="message-708480289197916200">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">$1 = 20 Shaklhs.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">08-May-20 05:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="708483098777485363" id="message-708483098777485363">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Patrian GPD: $323billion GDP Per Capita (PPP): $10,420</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-May-20 06:06 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="ADAMSball" title="ADAMSball" src="lore.html_Files/706453646522712074-35D11.png">
+                                <span class="chatlog__reaction-count">13</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#129297;" title="&#129297;" src="lore.html_Files/1f911-BE5A1.png">
+                                <span class="chatlog__reaction-count">12</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">08-May-20 06:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="708494541094912061" id="message-708494541094912061">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">36th largest GDP in the world, and 67th GDP Per Capita.
+This is going by the United Nations numbers.</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-May-20 06:44 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/35b9581e58690354e7ede274fb4f4b4d-6F88D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Arksiane#0142" data-user-id="203781815964532736" style="color: rgb(92,95,255)">Arksiane</span>
+
+
+        <span class="chatlog__timestamp">08-May-20 09:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="708543772656533616" id="message-708543772656533616">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">$1 = 75 rupees btw</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128184;" title="&#128184;" src="lore.html_Files/1f4b8-4C23E.png">
+                                <span class="chatlog__reaction-count">28</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">09-May-20 02:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="708794090376134748" id="message-708794090376134748">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Revenue per year: $87billion</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">08-Jun-20 09:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="719766654632067083" id="message-719766654632067083">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://docs.google.com/document/d/1tqHSTBD369sOmbBUgHpweEF1bWV3DSfkI71Jgs-SR04/edit">https://docs.google.com/document/d/1tqHSTBD369sOmbBUgHpweEF1bWV3DSfkI71Jgs-SR04/edit</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://docs.google.com/document/d/1tqHSTBD369sOmbBUgHpweEF1bWV3DSfkI71Jgs-SR04/edit">
+                                                    <div class="markdown preserve-whitespace">Thuzland: Country Facts</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">Nation of Thuzland    Capital: Sancto Pedro</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="lore.html_Files/RtBvpT4nYcCRWl_QKhXvQXgFeah5oehaLs_ebu9U0K-0C4C3">
+                                            <img class="chatlog__embed-thumbnail" src="lore.html_Files/RtBvpT4nYcCRWl_QKhXvQXgFeah5oehaLs_ebu9U0K-0C4C3" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">08-Jun-20 11:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="719796459540840549" id="message-719796459540840549">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The word &quot;thuzoid&quot; is a &#39;racial&#39; slur used by disgraced citizens of Patrium to describe the residents of Thuzland, there are some campaigns to end the usage of this word, but after the posturing from Thuzi pirates and the rumors of Thuzland aiding the farmers in the agricultural debate, the use of the word has soared into the colloquial vernacular of the every day Patrian.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/f92815ada9cd6521115f93c74fcef479-B36F0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Frank Devoosere#0551" data-user-id="530153917254860801" style="color: rgb(127,125,243)">True King Frank (very edgy)</span>
+
+
+        <span class="chatlog__timestamp">09-Jun-20 02:26 AM</span>
+
+            <div class="chatlog__message " data-message-id="719844742820659214" id="message-719844742820659214">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Patrium is in the commonwealth of nations</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">09-Jun-20 11:24 AM</span>
+
+            <div class="chatlog__message " data-message-id="719980169703587981" id="message-719980169703587981">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Land Area of Thuzland: 223,793.58 km2  (86,407.18 miles2)</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Jun-20 11:28 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">09-Jun-20 12:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="719989728597901392" id="message-719989728597901392">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Thuzland Lower House:</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/unknown-C9A4C.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/unknown-C9A4C.png" alt="Image attachment" title="Image: unknown.png (161.9 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="Deleted User#0000" style="">Deleted User</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;719766654632067083&#39;)">
+                    <span class="chatlog__reference-content">
+<a href="https://docs.google.com/document/d/1tqHSTBD369sOmbBUgHpweEF1bWV3DSfkI71Jgs-SR04/edit">https://docs.google.com/document/d/1tqHSTBD369sOmbBUgHpweEF1bWV3DSfkI71Jgs-SR04/edit</a>                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/f92815ada9cd6521115f93c74fcef479-B36F0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Frank Devoosere#0551" data-user-id="530153917254860801" style="color: rgb(127,125,243)">True King Frank (very edgy)</span>
+
+
+        <span class="chatlog__timestamp">10-Jun-20 09:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="720308433965809734" id="message-720308433965809734">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Pinned a message.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">15-Jun-20 10:54 AM</span>
+
+            <div class="chatlog__message " data-message-id="722146917550653460" id="message-722146917550653460">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The annual budget of Patrium is ~101.5 billion</span>
+
+                                <span class="chatlog__edited-timestamp" title="15-Jun-20 10:54 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">15-Jun-20 02:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="722202986935222303" id="message-722202986935222303">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Currently the unemployment rate of Patrium is ~5.7%</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">19-Jun-20 07:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="723733457838276639" id="message-723733457838276639">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The Government of Patrium has now nationalized Miller Inc. they own 69% of the shares
+
+
+Timothy Miller was paid 320 million for his 18%</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Jun-20 08:00 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="6️⃣" title="6️⃣" src="lore.html_Files/36-20e3-40DEB.png">
+                                <span class="chatlog__reaction-count">10</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="9️⃣" title="9️⃣" src="lore.html_Files/39-20e3-C145F.png">
+                                <span class="chatlog__reaction-count">10</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">19-Jun-20 09:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="723760678988677180" id="message-723760678988677180">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://docs.google.com/spreadsheets/d/1Nro15XPT7JBxBCw1LM9R_9MgFAGmp79tC2TF5O-umVE/edit#gid=0">https://docs.google.com/spreadsheets/d/1Nro15XPT7JBxBCw1LM9R_9MgFAGmp79tC2TF5O-umVE/edit#gid=0</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://docs.google.com/spreadsheets/d/1Nro15XPT7JBxBCw1LM9R_9MgFAGmp79tC2TF5O-umVE/edit">
+                                                    <div class="markdown preserve-whitespace">Billy&#39;s NPCs</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">Sheet1
+
+Character,Occupation,Party,Image Link
+Timothy Miller,Former Miller Inc. Owner,Former PIP,<a href="https://vignette.wikia.nocookie.net/pokemon/images/a/a2/Clay">https://vignette.wikia.nocookie.net/pokemon/images/a/a2/Clay</a>....</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="lore.html_Files/kkvClXcLgS3gKDDSRm1ytH4LuqKIs8xIPNUuXHfPwz-3B4E5">
+                                            <img class="chatlog__embed-thumbnail" src="lore.html_Files/kkvClXcLgS3gKDDSRm1ytH4LuqKIs8xIPNUuXHfPwz-3B4E5" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">20-Jun-20 08:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="723917074585616546" id="message-723917074585616546">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Our secular laws are based off English common law</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">21-Jun-20 10:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="724489571097772064" id="message-724489571097772064">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">updated road map once the highways are complete
+
+highways are in the faded pink</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/patrium_roads-F63F2.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/patrium_roads-F63F2.png" alt="Image attachment" title="Image: patrium_roads.png (1.43 MB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">24-Jun-20 05:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="725513089461518396" id="message-725513089461518396">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">14 percent of foreign investors are American</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">24-Jun-20 06:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="725518645383659562" id="message-725518645383659562">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">30% of foreign investment comes from the United States</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">29-Jun-20 08:40 AM</span>
+
+            <div class="chatlog__message " data-message-id="727186788715855983" id="message-727186788715855983">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Average income is 22k USD 
+
+Median income is 12k USD</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="chad" title="chad" src="lore.html_Files/726169273633996973-EBD85.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="handwithgun" title="handwithgun" src="lore.html_Files/706477208981602324-5FA6C.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">03-Jul-20 11:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="728674903552950395" id="message-728674903552950395">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/island_of_jazira-32DA2.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/island_of_jazira-32DA2.png" alt="Image attachment" title="Image: island_of_jazira.png (1.69 MB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127345;️" title="&#127345;️" src="lore.html_Files/1f171-9B83E.png">
+                                <span class="chatlog__reaction-count">8</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127344;️" title="&#127344;️" src="lore.html_Files/1f170-72614.png">
+                                <span class="chatlog__reaction-count">8</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127480;" title="&#127480;" src="lore.html_Files/1f1f8-B6AC7.png">
+                                <span class="chatlog__reaction-count">8</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127466;" title="&#127466;" src="lore.html_Files/1f1ea-4B558.png">
+                                <span class="chatlog__reaction-count">8</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127465;" title="&#127465;" src="lore.html_Files/1f1e9-5BADE.png">
+                                <span class="chatlog__reaction-count">8</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="MODball1" title="MODball1" src="lore.html_Files/707127735322935367-F522B.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">03-Jul-20 07:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="728800923891269705" id="message-728800923891269705">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Map of the Island of Jazira with roads and major cities (only Patrium has minor cities/major suburbs on this)</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/island_of_jazira-6C453.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/island_of_jazira-6C453.png" alt="Image attachment" title="Image: island_of_jazira.png (2.23 MB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127463;" title="&#127463;" src="lore.html_Files/1f1e7-86C69.png">
+                                <span class="chatlog__reaction-count">6</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127462;" title="&#127462;" src="lore.html_Files/1f1e6-79872.png">
+                                <span class="chatlog__reaction-count">6</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127480;" title="&#127480;" src="lore.html_Files/1f1f8-B6AC7.png">
+                                <span class="chatlog__reaction-count">6</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127466;" title="&#127466;" src="lore.html_Files/1f1ea-4B558.png">
+                                <span class="chatlog__reaction-count">6</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127465;" title="&#127465;" src="lore.html_Files/1f1e9-5BADE.png">
+                                <span class="chatlog__reaction-count">6</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="Deleted User#0000" style="">Deleted User</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;728800923891269705&#39;)">
+                    <span class="chatlog__reference-content">
+Map of the Island of Jazira with roads and major cities (only Patrium has minor cities/major suburbs on this)                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">03-Jul-20 07:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="728800950289956974" id="message-728800950289956974">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Pinned a message.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/f92815ada9cd6521115f93c74fcef479-B36F0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Frank Devoosere#0551" data-user-id="530153917254860801" style="color: rgb(127,125,243)">True King Frank (very edgy)</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-20 01:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="734509482373152878" id="message-734509482373152878">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Some words about Adams</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="734509489222451218" id="message-734509489222451218">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/unknown-8CE4C.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/unknown-8CE4C.png" alt="Image attachment" title="Image: unknown.png (53.02 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">20-Jul-20 02:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="734891740645031980" id="message-734891740645031980">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Timothy Miller has decided to pull out of all Patrian ventures and is making his permanent residence in Pittsburgh, Pennsylvania</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/f92815ada9cd6521115f93c74fcef479-B36F0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Frank Devoosere#0551" data-user-id="530153917254860801" style="color: rgb(127,125,243)">True King Frank (very edgy)</span>
+
+
+        <span class="chatlog__timestamp">22-Jul-20 12:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="735585137755947011" id="message-735585137755947011">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Leader of the entire fucking army: president Adams (F)
+Army at Nuevo Brubante: Ioannis Waller
+Army at mainland Thuzi border: Onailime Atapaz
+Army doing rescue and stabilising on the East coast: Natalie McKinley
+Army guarding the Selvan border: Augusto Ricochet
+Army guarding the South coast: Napoleon Von Tuhka-Clausewitz
+Army Logistics Supervisor: Nicholas Ropokkit</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="pog" title="pog" src="lore.html_Files/718560473397854209-7A1EE.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">27-Jul-20 11:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="737372023877271584" id="message-737372023877271584">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Nuevo Brabante War was from 1982 to 1987</span>
+
+                                <span class="chatlog__edited-timestamp" title="27-Jul-20 11:22 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/f92815ada9cd6521115f93c74fcef479-B36F0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Frank Devoosere#0551" data-user-id="530153917254860801" style="color: rgb(127,125,243)">True King Frank (very edgy)</span>
+
+
+        <span class="chatlog__timestamp">27-Jul-20 02:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="737417069233963099" id="message-737417069233963099">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">In this war, Patrium attacked Thuzland to capture Nuevo Brubante. The war was settled by the US and USSR and the island was divided between the two countries</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/f92815ada9cd6521115f93c74fcef479-B36F0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Frank Devoosere#0551" data-user-id="530153917254860801" style="color: rgb(127,125,243)">True King Frank (very edgy)</span>
+
+
+        <span class="chatlog__timestamp">28-Jul-20 02:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="737776672853590021" id="message-737776672853590021">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Admiral of the entire navy: Uglov Rustem Dmitrievich</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">10-Aug-20 10:59 AM</span>
+
+            <div class="chatlog__message " data-message-id="742441950812307536" id="message-742441950812307536">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Providence map of Patrium</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/unknown-BA6BB.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/unknown-BA6BB.png" alt="Image attachment" title="Image: unknown.png (374.43 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="742442171894071328" id="message-742442171894071328">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Court appeal system/court system in Patrium</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/unknown-CFD2E.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/unknown-CFD2E.png" alt="Image attachment" title="Image: unknown.png (107.52 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="742442366471897178" id="message-742442366471897178">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">There are no juries but instead a group of judges that decide together.
+You can appeal a decision to a higher court.
+and the senate can vote automatically bring a court case to the senate and skip all the other courts.
+the senate votes on these cases are the basis of how the constitution is interpreted.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">15-Aug-20 11:43 PM</span>
+
+            <div class="chatlog__message " data-message-id="744446180863508520" id="message-744446180863508520">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://media.discordapp.net/attachments/716725877622177792/744442951798751242/unknown.png?width=822&height=671">https://media.discordapp.net/attachments/716725877622177792/744442951798751242/unknown.png?width=822&amp;height=671</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="lore.html_Files/unknown-745F4.png">
+                                            <img class="chatlog__embed-thumbnail" src="lore.html_Files/unknown-745F4.png" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">17-Aug-20 06:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="745094683880980610" id="message-745094683880980610">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Chungi(i)s are native to Patrium</span>
+
+                                <span class="chatlog__edited-timestamp" title="11-Jan-21 03:38 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="745094692307468298" id="message-745094692307468298">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">more to come</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">19-Aug-20 12:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="745719117532758027" id="message-745719117532758027">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Being openly transgender is not currently legal in Patrium</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="chad" title="chad" src="lore.html_Files/725038887386480671-461E3.png">
+                                <span class="chatlog__reaction-count">13</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="mfw" title="mfw" src="lore.html_Files/726165918488592415-D8140.png">
+                                <span class="chatlog__reaction-count">12</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="poggers" title="poggers" src="lore.html_Files/718560806589038652-003B3.png">
+                                <span class="chatlog__reaction-count">13</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="LETSFUCKINGGOO" title="LETSFUCKINGGOO" src="lore.html_Files/726577298815320134-70099.png">
+                                <span class="chatlog__reaction-count">13</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="LETSFUCKINGGOOOOO" title="LETSFUCKINGGOOOOO" src="lore.html_Files/742782373460050072-7C232.png">
+                                <span class="chatlog__reaction-count">13</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="LETSFUCKINGGOOOOOOO" title="LETSFUCKINGGOOOOOOO" src="lore.html_Files/712857357520076820-4086F.png">
+                                <span class="chatlog__reaction-count">14</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="letsfuckinggo" title="letsfuckinggo" src="lore.html_Files/744198549935226911-DDC9C.png">
+                                <span class="chatlog__reaction-count">13</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="LETSFUCKINGGOOOOOO" title="LETSFUCKINGGOOOOOO" src="lore.html_Files/741186124260573210-63541.png">
+                                <span class="chatlog__reaction-count">13</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128077;" title="&#128077;" src="lore.html_Files/1f44d-1485B.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">19-Aug-20 06:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="745809507237757060" id="message-745809507237757060">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Gender reassignment surgery is illegal in Patrium.</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="poggers" title="poggers" src="lore.html_Files/718560806589038652-003B3.png">
+                                <span class="chatlog__reaction-count">12</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128077;" title="&#128077;" src="lore.html_Files/1f44d-1485B.png">
+                                <span class="chatlog__reaction-count">6</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128553;" title="&#128553;" src="lore.html_Files/1f629-B5B8C.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="745809746636046477" id="message-745809746636046477">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">however with the right connections it is possible to get.</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="wojak_cry" title="wojak_cry" src="lore.html_Files/739158380329041956-C2253.png">
+                                <span class="chatlog__reaction-count">12</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="pog" title="pog" src="lore.html_Files/718560473397854209-7A1EE.png">
+                                <span class="chatlog__reaction-count">18</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">20-Aug-20 09:38 AM</span>
+
+            <div class="chatlog__message " data-message-id="746045396341489694" id="message-746045396341489694">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The territory conquered from Thuzland is currently unorganized territory under the direct control of the Senate of Patrium</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">20-Aug-20 12:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="746087088520429658" id="message-746087088520429658">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/image0-DEA2E.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/image0-DEA2E.png" alt="Image attachment" title="Image: image0.png (1.23 MB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">20-Aug-20 03:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="746130616457756723" id="message-746130616457756723">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Map showing territory acquired by Patrium and Jazira after the war.
+(Made by Billy)</span>
+
+                                <span class="chatlog__edited-timestamp" title="20-Aug-20 03:33 PM">(edited)</span>
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/image0-B223D.jpg">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/image0-B223D.jpg" alt="Image attachment" title="Image: image0.jpg (1.75 MB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/2777f97249b89dbc2057bc54ef460dec-0BDC4.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Amaaroc#9466" data-user-id="251916063204311041" style="">Amaaroc</span>
+
+
+        <span class="chatlog__timestamp">20-Aug-20 05:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="746168756430045294" id="message-746168756430045294">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">New map with all the cities and roads of the new territories (that are actually named this time)</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/image0-BBBE5.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/image0-BBBE5.png" alt="Image attachment" title="Image: image0.png (3.4 MB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">22-Aug-20 11:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="746792917343141898" id="message-746792917343141898">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Former President Adams full name is: Henry George Adams</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="georgism" title="georgism" src="lore.html_Files/676896807850344475-560C1.png">
+                                <span class="chatlog__reaction-count">11</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="georgmon" title="georgmon" src="lore.html_Files/744610745123078194-197D2.png">
+                                <span class="chatlog__reaction-count">8</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="MuhLandTax3" title="MuhLandTax3" src="lore.html_Files/740008005566988368-6230D.png">
+                                <span class="chatlog__reaction-count">8</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="landlordpride" title="landlordpride" src="lore.html_Files/709112133392007168-80389.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">22-Aug-20 02:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="746843558648217690" id="message-746843558648217690">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Labor force participation rate is 63.4%</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">22-Aug-20 02:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="746846330336313446" id="message-746846330336313446">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">23.8% of the population is under 15.
+
+15 is the minimum working age <em>legally</em></span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="poggers" title="poggers" src="lore.html_Files/718560806589038652-003B3.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">22-Aug-20 02:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="746849557916287018" id="message-746849557916287018">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">This is an image of former President Adams</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/unknown-A8C12.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/unknown-A8C12.png" alt="Image attachment" title="Image: unknown.png (320.44 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="untroll" title="untroll" src="lore.html_Files/745528143607234563-B713B.png">
+                                <span class="chatlog__reaction-count">17</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/ff7cff40f8d4d5d526b009ea4cfe1917-96AFF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ThomasTheDOOT#2218" data-user-id="182552817351917568" style="color: rgb(149,165,166)">Rafa Telmo</span>
+
+
+        <span class="chatlog__timestamp">27-Aug-20 06:52 AM</span>
+
+            <div class="chatlog__message " data-message-id="748540354931982426" id="message-748540354931982426">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Passport and ID card</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/stuff-448F5.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/stuff-448F5.png" alt="Image attachment" title="Image: stuff.png (38.91 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="pog" title="pog" src="lore.html_Files/718560473397854209-7A1EE.png">
+                                <span class="chatlog__reaction-count">10</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/ff7cff40f8d4d5d526b009ea4cfe1917-96AFF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ThomasTheDOOT#2218" data-user-id="182552817351917568" style="color: rgb(149,165,166)">Rafa Telmo</span>
+
+
+        <span class="chatlog__timestamp">27-Aug-20 11:30 AM</span>
+
+            <div class="chatlog__message " data-message-id="748610320070869024" id="message-748610320070869024">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Wait, cant bars and clubs who have to check for ID&#39;s use the thuzi check on the ID card use it to disallow thuzis?&quot;
+Yep</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">29-Aug-20 02:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="749385408491683850" id="message-749385408491683850">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Chungi is an official race in Patrium</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="749386513552244776" id="message-749386513552244776">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">there are 750,000 military personnel in Patrium, this includes all military staff.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">15-Sep-20 11:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="755678755183263805" id="message-755678755183263805">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Patrium&#39;s minimum wage is $3.50/hour. Maximum work week is 48 hours. (Though the regular work week remains at 40 hours in many industries.)</span>
+
+                                <span class="chatlog__edited-timestamp" title="18-Jan-21 10:42 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127476;" title="&#127476;" src="lore.html_Files/1f1f4-6C4DE.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127358;️" title="&#127358;️" src="lore.html_Files/1f17e-78F24.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127467;" title="&#127467;" src="lore.html_Files/1f1eb-E45E1.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="poggers" title="poggers" src="lore.html_Files/718560806589038652-003B3.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">20-Sep-20 08:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="757448376806539285" id="message-757448376806539285">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">patrian flag</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/patrium-B24EC.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/patrium-B24EC.png" alt="Image attachment" title="Image: patrium.png (50.27 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">24-Sep-20 08:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="758892013235470356" id="message-758892013235470356">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">thuzi flag</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/thuzland-BFAA3.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/thuzland-BFAA3.png" alt="Image attachment" title="Image: thuzland.png (15.53 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#129326;" title="&#129326;" src="lore.html_Files/1f92e-D0B81.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="758892038719930388" id="message-758892038719930388">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">selvan flag</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/selva-08DC4.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/selva-08DC4.png" alt="Image attachment" title="Image: selva.png (24.48 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="758892071821508610" id="message-758892071821508610">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">jaziran flag</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/jazira-74FD9.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/jazira-74FD9.png" alt="Image attachment" title="Image: jazira.png (8.42 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 09:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="770507801075122176" id="message-770507801075122176">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="quote">Patrium&#39;s Main exports consist of: coffee, precious minerals and gems, fish, fruits, cereals, and ores
+</div>The main minerals mined in Patrium include lithium, cobalt, and copper.</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Oct-20 09:43 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 12:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="770736237220855898" id="message-770736237220855898">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://docs.google.com/document/d/1ctueqTRhWukIwv1lZCq_LbIY8S-im4ZfkoAnIrQGh-Y/edit?usp=sharing">https://docs.google.com/document/d/1ctueqTRhWukIwv1lZCq_LbIY8S-im4ZfkoAnIrQGh-Y/edit?usp=sharing</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://docs.google.com/document/d/1ctueqTRhWukIwv1lZCq_LbIY8S-im4ZfkoAnIrQGh-Y/edit?usp=sharing">
+                                                    <div class="markdown preserve-whitespace">SEAB Quarterly Report</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">Senate Economic Advisory Board Quarterly Report  We have seen a continual decline of the economy recently.  We can see in this graph that foreign investment in Patrium has been on a decline.  Additionally, we can see here a graph of the activity of the two most affected indust...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="lore.html_Files/X6h0h_Tzc1gqWC_toATDgFUIGbz4tQngJXek8kUkD2-2322B">
+                                            <img class="chatlog__embed-thumbnail" src="lore.html_Files/X6h0h_Tzc1gqWC_toATDgFUIGbz4tQngJXek8kUkD2-2322B" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/ac7c54c0929c33ade1d501e68c4775e9-81738.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cbass#6969" data-user-id="415660414651596800" style="">cbass</span>
+
+
+        <span class="chatlog__timestamp">29-Oct-20 10:59 AM</span>
+
+            <div class="chatlog__message " data-message-id="771433117197008896" id="message-771433117197008896">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://docs.google.com/spreadsheets/d/11IuAN7M9zZs1647Aj0_xA464i0bxXAfGcz_5lf9aopw/edit?usp=sharing">https://docs.google.com/spreadsheets/d/11IuAN7M9zZs1647Aj0_xA464i0bxXAfGcz_5lf9aopw/edit?usp=sharing</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://docs.google.com/spreadsheets/d/11IuAN7M9zZs1647Aj0_xA464i0bxXAfGcz_5lf9aopw/edit?usp=sharing">
+                                                    <div class="markdown preserve-whitespace">Patrium Census</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">2020
+
+Avg. Household Pop.
+3.1
+Race
+African,17%
+Asian,9%
+Jewish,1%
+Latino/a,21%
+Middle Eastern/Arab,21%
+White,28%
+Other,3%
+100%
+Citizenship
+Yes,89%
+No,11%
+Naturalized,13%
+Birthright,87%
+Avg. Age
+26.4
+Marital Status
+Yes,36%
+No,64%
+Med. Household Income
+$36,500</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="lore.html_Files/u33XvoYsqFjcjU0jua2-NXp46bPi1AABuUI0Oye8Ee-35CF8">
+                                            <img class="chatlog__embed-thumbnail" src="lore.html_Files/u33XvoYsqFjcjU0jua2-NXp46bPi1AABuUI0Oye8Ee-35CF8" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/ac7c54c0929c33ade1d501e68c4775e9-81738.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cbass#6969" data-user-id="415660414651596800" style="">cbass</span>
+
+
+        <span class="chatlog__timestamp">16-Nov-20 11:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="777980274998378586" id="message-777980274998378586">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Patrium&#39;s debt is $400 billion USD</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">19-Nov-20 08:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="779208199378305034" id="message-779208199378305034">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Energy consumption in Patrium:
+    30% oil
+    30% gas
+    20% coal
+    20% renewable energy/other (mainly hydro)
+Patrium imports 60% of its consumed energy
+Patrium&#39;s main source of domestically generated energy is hydraulic power
+Energy use per capita, 1,500 kWh</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Nov-20 09:06 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="779208329016639508" id="message-779208329016639508">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">5% of Patrians are without electricity</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">20-Nov-20 08:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="779571291094253568" id="message-779571291094253568">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Shares of Manufacturing Sector in Patrium
+
+40% industrial
+20% food
+13% weapons
+10% commercial
+10% retail
+1% auto
+6% other
+
+Notable manufacturing exports include batteries and weapons</span>
+
+                                <span class="chatlog__edited-timestamp" title="20-Nov-20 08:58 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="pog" title="pog" src="lore.html_Files/718560473397854209-7A1EE.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">05-Dec-20 01:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="784898357461385256" id="message-784898357461385256">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/tra-B5BE8.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/tra-B5BE8.png" alt="Image attachment" title="Image: tra.png (412.21 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="784898441393340507" id="message-784898441393340507">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Image of the official Patrium federal goverment seal</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">05-Dec-20 07:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="784989513583689768" id="message-784989513583689768">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/unknown-66D60.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/unknown-66D60.png" alt="Image attachment" title="Image: unknown.png (147.14 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="784989545770254366" id="message-784989545770254366">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">this is col hartford</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">05-Dec-20 08:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="784998698765123604" id="message-784998698765123604">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/unknown-EBD29.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/unknown-EBD29.png" alt="Image attachment" title="Image: unknown.png (168.98 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="entj" title="entj" src="lore.html_Files/743755249092788294-DC4DA.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="784998719892094997" id="message-784998719892094997">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">this is drawing of him</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="784999237184126997" id="message-784999237184126997">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">In canon he killed 68 thuzis personally</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="entj" title="entj" src="lore.html_Files/743755249092788294-DC4DA.png">
+                                <span class="chatlog__reaction-count">13</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="784999296600113153" id="message-784999296600113153">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">12 of them where killed with his bare hands</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="pog" title="pog" src="lore.html_Files/718560473397854209-7A1EE.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">06-Dec-20 09:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="785381216915947582" id="message-785381216915947582">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The leader of the Patrian Socialist Republic from 1932 to 1951 was Ernest Character... Related to the current Senator Character of the ALP</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="spit" title="spit" src="lore.html_Files/759088461218709565-D5896.png">
+                                <span class="chatlog__reaction-count">13</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="based" title="based" src="lore.html_Files/724381343605063690-24EEE.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">08-Dec-20 04:20 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="786024453212471336" id="message-786024453212471336">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://docs.google.com/document/d/1gxRLLDHAIYm3TI-rq_ZkYG1PLDkCh5ujuCN6eSVsTJo/edit">https://docs.google.com/document/d/1gxRLLDHAIYm3TI-rq_ZkYG1PLDkCh5ujuCN6eSVsTJo/edit</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://docs.google.com/document/d/1gxRLLDHAIYm3TI-rq_ZkYG1PLDkCh5ujuCN6eSVsTJo/edit">
+                                                    <div class="markdown preserve-whitespace">Lore of Patrium</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">Historical Overview  The small continent of Jazira was left largely uninhabited by humans for centuries. In the rest of the world, empires of legend would rise and fall, cultures would grow and prosper, but Jazira would remain the same: isolated and devoid of human contact. Only until the 14th ce...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="lore.html_Files/S4mh1kB8J8hY1AyJK9gVeQh3L5t_Uhd-k4elg468sW-15E12">
+                                            <img class="chatlog__embed-thumbnail" src="lore.html_Files/S4mh1kB8J8hY1AyJK9gVeQh3L5t_Uhd-k4elg468sW-15E12" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">10-Dec-20 04:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="786744180578713650" id="message-786744180578713650">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">There are approximately 112,000 square kilometers of farmland in Patrium, each one worth, on average, $70k.</span>
+
+                                <span class="chatlog__edited-timestamp" title="10-Dec-20 04:19 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="LETSFUCKINGGOOOOOOO" title="LETSFUCKINGGOOOOOOO" src="lore.html_Files/784835889859788851-D53AD.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/c386e9c58db72f8189f02551186fddb6-5D8A7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dieselkeough#5676" data-user-id="219570630448775170" style="">Dieselkeough</span>
+
+
+        <span class="chatlog__timestamp">29-Dec-20 07:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="793680619497848863" id="message-793680619497848863">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The official name of the last battle of the civil war in jamesville is the Battle of Goodsprings</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">30-Dec-20 08:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="794058249884008458" id="message-794058249884008458">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">High def provinces map</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Dec-20 08:38 PM">(edited)</span>
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/DONE-99525.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/DONE-99525.png" alt="Image attachment" title="Image: DONE.png (627.9 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="♥️" title="♥️" src="lore.html_Files/2665-D9AA0.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">30-Dec-20 08:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="794060835273834516" id="message-794060835273834516">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Map of damage level caused to provinces in the civil war</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/damage_map-59654.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/damage_map-59654.png" alt="Image attachment" title="Image: damage_map.png (682.34 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="❤️" title="❤️" src="lore.html_Files/2764-18179.png">
+                                <span class="chatlog__reaction-count">6</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">31-Dec-20 12:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="794303412468187206" id="message-794303412468187206">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">the above overlaid with patrium</span>
+
+                                <span class="chatlog__edited-timestamp" title="31-Dec-20 12:38 PM">(edited)</span>
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/damage_map_with_cities-6A734.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/damage_map_with_cities-6A734.png" alt="Image attachment" title="Image: damage_map_with_cities.png (1.5 MB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="❤️" title="❤️" src="lore.html_Files/2764-18179.png">
+                                <span class="chatlog__reaction-count">7</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">31-Dec-20 10:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="794454795397234709" id="message-794454795397234709">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">smh I get no hearts</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127474;" title="&#127474;" src="lore.html_Files/1f1f2-C2511.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127462;" title="&#127462;" src="lore.html_Files/1f1e6-79872.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127472;" title="&#127472;" src="lore.html_Files/1f1f0-DAB53.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127466;" title="&#127466;" src="lore.html_Files/1f1ea-4B558.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="794454822652084224" id="message-794454822652084224">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img class="emoji emoji--large" alt="😔" title="😔" src="https://twemoji.maxcdn.com/2/72x72/1f614.png"></span>
+
+                                <span class="chatlog__edited-timestamp" title="31-Dec-20 10:39 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127463;" title="&#127463;" src="lore.html_Files/1f1e7-86C69.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127466;" title="&#127466;" src="lore.html_Files/1f1ea-4B558.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127481;" title="&#127481;" src="lore.html_Files/1f1f9-24F03.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="3️⃣" title="3️⃣" src="lore.html_Files/33-20e3-58C3C.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127479;" title="&#127479;" src="lore.html_Files/1f1f7-2C305.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127474;" title="&#127474;" src="lore.html_Files/1f1f2-C2511.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127462;" title="&#127462;" src="lore.html_Files/1f1e6-79872.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127477;" title="&#127477;" src="lore.html_Files/1f1f5-E259F.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="❤️" title="❤️" src="lore.html_Files/2764-18179.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/c386e9c58db72f8189f02551186fddb6-5D8A7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dieselkeough#5676" data-user-id="219570630448775170" style="">Dieselkeough</span>
+
+
+        <span class="chatlog__timestamp">06-Jan-21 01:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="796488314894549043" id="message-796488314894549043">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Current shekhl exchange rate is equivalent to the zimbabwe dollar
+1 patrium shekhl = 1 zimbabwe dollar</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="entj" title="entj" src="lore.html_Files/743755249092788294-DC4DA.png">
+                                <span class="chatlog__reaction-count">7</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="kek" title="kek" src="lore.html_Files/794391402480926780-88CC6.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">07-Jan-21 07:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="796946687197052928" id="message-796946687197052928">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://docs.google.com/spreadsheets/d/1GsOTn98dHYeghVfe3FsbatN5MBEsNoUUFAWDdJaKrIM/edit#gid=0">https://docs.google.com/spreadsheets/d/1GsOTn98dHYeghVfe3FsbatN5MBEsNoUUFAWDdJaKrIM/edit#gid=0</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://docs.google.com/spreadsheets/d/1GsOTn98dHYeghVfe3FsbatN5MBEsNoUUFAWDdJaKrIM/edit">
+                                                    <div class="markdown preserve-whitespace">Patrian Budget (March 2022)</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">Budget Overview
+
+Category,Amount
+Military,-40.7,All numbers are in Billions USD
+Education,-21.5
+Medicare,-12.2
+Infrastructure,-48.7
+Debt,-9.6,Spending,Revenue,Difference
+Business Grants,-5.6,-157.7,77.3,-80.4
+Police,-4.8
+Prisons,-2.9
+Food Stamps,-1.7
+Education Grants,-1.0
+PAR Rebuilding,-3.0
+Inte...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="lore.html_Files/-cBdoLtFmEYOwAZ52BFF4foDr50iqt-5flyS7YnHX3-19BEE">
+                                            <img class="chatlog__embed-thumbnail" src="lore.html_Files/-cBdoLtFmEYOwAZ52BFF4foDr50iqt-5flyS7YnHX3-19BEE" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">11-Jan-21 03:29 AM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="798151568289431562" id="message-798151568289431562">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/Jazira_Island-6E3CA.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/Jazira_Island-6E3CA.png" alt="Image attachment" title="Image: Jazira_Island.png (3.22 MB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="798151587636838431" id="message-798151587636838431">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/Patrium-3AE07.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/Patrium-3AE07.png" alt="Image attachment" title="Image: Patrium.png (2.06 MB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="character-confusion#4343" style="color: rgb(234,68,255)">character-confusion</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;798151568289431562&#39;)">
+                    <span class="chatlog__reference-content">
+                            <em>Click to see original message</em>
+                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">11-Jan-21 03:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="798151612686139442" id="message-798151612686139442">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Pinned a message.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="character-confusion#4343" style="color: rgb(234,68,255)">character-confusion</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;798151587636838431&#39;)">
+                    <span class="chatlog__reference-content">
+                            <em>Click to see original message</em>
+                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">11-Jan-21 03:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="798151631329820672" id="message-798151631329820672">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Pinned a message.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">11-Jan-21 05:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="798369255783399436" id="message-798369255783399436">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><strong>Religious Breakdown of Patrium</strong>
+
+Christian 46%
+    Protestant 23%
+    Catholic 20%
+    Other 3%
+Muslim 16%
+    Sunni 14%
+    Shia 2%
+Jewish 2%
+Hindu 6%
+Pagan Religions 3%
+    Solarist 1.7%
+    Relevist  0.5%
+    Native Religions 0.6%
+    Other 0.2%
+Other 7%
+Non-religious 20%</span>
+
+                                <span class="chatlog__edited-timestamp" title="12-Jan-21 03:44 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">11-Jan-21 06:11 PM</span>
+
+            <div class="chatlog__message " data-message-id="798373492756185088" id="message-798373492756185088">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="lore.html_Files/Screen_Shot_2021-01-11_at_9.10.13_PM-A9954.png">
+                                        <img class="chatlog__attachment-thumbnail" src="lore.html_Files/Screen_Shot_2021-01-11_at_9.10.13_PM-A9954.png" alt="Image attachment" title="Image: Screen_Shot_2021-01-11_at_9.10.13_PM.png (64.07 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">12-Jan-21 07:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="798750352433217557" id="message-798750352433217557">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><strong>Political Affiliation of the Patrian Military</strong>
+
+PADRE 1.1%
+PIP 0.6%
+CGB 0.8%
+ILFP 0.8%
+HP 0.6%
+4P 1.4%
+TECHNO 1.6%
+TSP 1.8%
+ASS 3.1
+SG 1.7%
+FSL 3.1%
+EG 6.2%
+PMJ 5.9%
+PPE 5.3%
+PPL 3.3%
+LP 7.3%
+NCP 7.2%
+ALP 8.3%
+TPO 8.5%
+Independent/Unaffiliated 31.3%</span>
+
+                                <span class="chatlog__edited-timestamp" title="12-Jan-21 07:26 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/0545eb54a7ad1713e2410cdd9a8a57ec-29373.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Opossum#7861" data-user-id="274254297758171136" style="color: rgb(92,95,255)">Opossumod</span>
+
+
+        <span class="chatlog__timestamp">19-Jan-21 04:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="801246094775681044" id="message-801246094775681044">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">around 300k have been made homeless from the bombings of Jamesvile</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Jan-21 04:26 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="chad" title="chad" src="lore.html_Files/726169273633996973-EBD85.png">
+                                <span class="chatlog__reaction-count">8</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128532;" title="&#128532;" src="lore.html_Files/1f614-D4BEE.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">20-Jan-21 08:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="801665483501076510" id="message-801665483501076510">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Governor of the Central Bank of Patrium <a href="https://docs.google.com/document/d/1w_AGJCcQf31hHEYx3DxUqxh6j0e9I8IUAYx4iUPEQh8/edit">https://docs.google.com/document/d/1w_AGJCcQf31hHEYx3DxUqxh6j0e9I8IUAYx4iUPEQh8/edit</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://docs.google.com/document/d/1w_AGJCcQf31hHEYx3DxUqxh6j0e9I8IUAYx4iUPEQh8/edit">
+                                                    <div class="markdown preserve-whitespace">Nguyễn Văn Thiệu</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">Character Sheet  If has * beside it,  it’s required.  If has + beside it, it’s optional.  (Delete this part when making a character. Also make a copy of the doc.) ---------------------------------------------------------------------------------------  *Name: Nguyễn Văn Thiệu   +Age: 44  +Weight: ...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="lore.html_Files/DILgWy7I52xWsySFEkxE4_V4pjSm2tphkxzJrFT3j4-BC299">
+                                            <img class="chatlog__embed-thumbnail" src="lore.html_Files/DILgWy7I52xWsySFEkxE4_V4pjSm2tphkxzJrFT3j4-BC299" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127483;&#127475;" title="&#127483;&#127475;" src="lore.html_Files/1f1fb-1f1f3-5FBD7.png">
+                                <span class="chatlog__reaction-count">10</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="chad" title="chad" src="lore.html_Files/726169273633996973-EBD85.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">21-Jan-21 08:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="802034101414526976" id="message-802034101414526976">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Executive Cabinet
+
+Minister of Defense - military affairs
+Minister of Finance - government finances, treasury, taxes
+Minister of Justice - legal system
+Minister of Development - transportation, energy, infrastructure
+Minister of Domestic Affairs - homeland security, law enforcement agencies
+Minister of Foreign Affairs - foreign policy, international relations 
+Minister of Resources - agriculture, natural resources 
+Minister of Labor - labor laws, job services and unemployment 
+Minister of Commerce - business, industry
+Minister of Health - healthcare
+Minister of Education - education, schooling</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="lore.html_Files/ac7c54c0929c33ade1d501e68c4775e9-81738.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cbass#6969" data-user-id="415660414651596800" style="">cbass</span>
+
+
+        <span class="chatlog__timestamp">27-Feb-21 04:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="815382584699650120" id="message-815382584699650120">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The name of the Minister of Resources is Reyna Iglesia.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 116 message(s)</div>
+</div>
+
+</body>
+
+</html>

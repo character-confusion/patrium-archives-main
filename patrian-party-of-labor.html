@@ -1,0 +1,2728 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Patrium Interactive - patrian-party-of-labor</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chatlog__reference-link:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="patrian-party-of-labor.html_Files/9b819ad7f12669e74179c7037ebd216b-867EF.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">Patrium Interactive</div>
+        <div class="preamble__entry">Political Parties / patrian-party-of-labor</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/485f92e9b6286f0ce0a8ae04c64c751b-18E2C.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="someguyinshorts#8871" data-user-id="690045063279149078" style="">someguyinshorts</span>
+
+
+        <span class="chatlog__timestamp">26-Dec-20 08:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="792615900423258162" id="message-792615900423258162">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" style="color: rgb(216, 79, 129); background-color: rgba(216, 79, 129, 0.1);">@Patrian Party of Labor</span> 48 hours for numero dos</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">26-Dec-20 08:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="792616137527394356" id="message-792616137527394356">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Man</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="792616162109947904" id="message-792616162109947904">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Stole the fucking name I used</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Dec-20 08:53 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">26-Dec-20 08:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="792616290912567323" id="message-792616290912567323">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Don&#39;t worry guys, we will get a second member by this Christmas!</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/ac7c54c0929c33ade1d501e68c4775e9-81738.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cbass#6969" data-user-id="415660414651596800" style="">cbass</span>
+
+
+        <span class="chatlog__timestamp">29-Dec-20 09:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="793715227975876649" id="message-793715227975876649">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">hello</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">29-Dec-20 10:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="793720242336694272" id="message-793720242336694272">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Hi</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/2777f97249b89dbc2057bc54ef460dec-0BDC4.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Amaaroc#9466" data-user-id="251916063204311041" style="">Amaaroc</span>
+
+
+        <span class="chatlog__timestamp">29-Dec-20 10:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="793732570973732875" id="message-793732570973732875">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I can’t believe you joined this</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="793732671041699890" id="message-793732671041699890">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">This looks so similar to FSL that I thought it was,</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/ac7c54c0929c33ade1d501e68c4775e9-81738.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cbass#6969" data-user-id="415660414651596800" style="">cbass</span>
+
+
+        <span class="chatlog__timestamp">29-Dec-20 11:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="793740683134631947" id="message-793740683134631947">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">lfmao</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="793740731101085706" id="message-793740731101085706">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i decided the best way to move forward is consolidation</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">30-Dec-20 10:41 AM</span>
+
+            <div class="chatlog__message " data-message-id="793911777326006292" id="message-793911777326006292">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" style="color: rgb(216, 79, 129); background-color: rgba(216, 79, 129, 0.1);">@Patrian Party of Labor</span> React to this message within 5 days or you’ll be removed from this party and given the partyless role</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#129328;" title="&#129328;" src="patrian-party-of-labor.html_Files/1f930-BE262.png">
+                                <span class="chatlog__reaction-count">6</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="patrian-party-of-labor.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="character-confusion#4343" style="color: rgb(234,68,255)">character-confusion</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;793911777326006292&#39;)">
+                    <span class="chatlog__reference-content">
+<span class="mention" style="color: rgb(216, 79, 129); background-color: rgba(216, 79, 129, 0.1);">@Patrian Party of Labor</span> React to this message within 5 days or you’ll be removed from this party and given the partyless role                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">30-Dec-20 10:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="793911906125217812" id="message-793911906125217812">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">no</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="793911927859970059" id="message-793911927859970059">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img class="emoji emoji--large" alt="troll" title="troll" src="https://cdn.discordapp.com/emojis/745153753505857617.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="793912351828344872" id="message-793912351828344872">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="grubhub guy#2162">@grubhub guy</span> <span class="mention" title="Spaceroyal#2293">@Kingston</span> this is important.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/03590b24a4232b434a692e081a9a4441-8D060.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Spaceroyal#2293" data-user-id="403267434628251659" style="color: rgb(202,175,95)">Kingston</span>
+
+
+        <span class="chatlog__timestamp">30-Dec-20 10:48 AM</span>
+
+            <div class="chatlog__message " data-message-id="793913460990803968" id="message-793913460990803968">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Hi</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">30-Dec-20 10:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="793913616893870090" id="message-793913616893870090">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I am not pinging hugo bc he is online enough to figure it out.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/ac7c54c0929c33ade1d501e68c4775e9-81738.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cbass#6969" data-user-id="415660414651596800" style="">cbass</span>
+
+
+        <span class="chatlog__timestamp">30-Dec-20 11:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="793916844070273044" id="message-793916844070273044">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ty for not pinging luv</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="793916888135630848" id="message-793916888135630848">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">im barely conscious</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">30-Dec-20 11:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="793916998517653525" id="message-793916998517653525">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="grubhub guy#2162">@grubhub guy</span> react to the message</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/35e3b24578fe2dd3ee75d5643e3ab2ce-5A2B5.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="grubhub guy#2162" data-user-id="788157030648905729" style="">grubhub guy</span>
+
+
+        <span class="chatlog__timestamp">30-Dec-20 11:12 AM</span>
+
+            <div class="chatlog__message " data-message-id="793919460372381707" id="message-793919460372381707">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I was fuckig busy shitdick</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/ac7c54c0929c33ade1d501e68c4775e9-81738.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cbass#6969" data-user-id="415660414651596800" style="">cbass</span>
+
+
+        <span class="chatlog__timestamp">30-Dec-20 11:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="793921531896922132" id="message-793921531896922132">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">reeeeeeee</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">02-Jan-21 05:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="795108063849611304" id="message-795108063849611304">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" style="color: rgb(92, 95, 255); background-color: rgba(92, 95, 255, 0.1);">@Moderator</span> we are changing our name to The Peoples&#39; Communist Party, as WUF is a shit acronym.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">02-Jan-21 05:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="795108114692702249" id="message-795108114692702249">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">haha giving up on left unity so soon are we</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="patrian-party-of-labor.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="character-confusion#4343" style="color: rgb(234,68,255)">character-confusion</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;795108114692702249&#39;)">
+                    <span class="chatlog__reference-content">
+haha giving up on left unity so soon are we                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">02-Jan-21 05:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="795108309908717578" id="message-795108309908717578">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Legit, it is still left unity, WUF is just not a good acronym.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/e0243695eb9a4945e1cfd07b74def51b-C4CBF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="character-confusion#4343" data-user-id="532351353201360926" style="color: rgb(234,68,255)">character-confusion</span>
+
+
+        <span class="chatlog__timestamp">02-Jan-21 05:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="795108331998937108" id="message-795108331998937108">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">mmhm</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="795108334981611531" id="message-795108334981611531">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">sure</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="795108376023138305" id="message-795108376023138305">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Communist party&quot; <em>sounds</em> like left unity</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/c386e9c58db72f8189f02551186fddb6-5D8A7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dieselkeough#5676" data-user-id="219570630448775170" style="">Dieselkeough</span>
+
+
+        <span class="chatlog__timestamp">06-Jan-21 07:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="796575685514231828" id="message-796575685514231828">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" style="color: rgb(216, 79, 129); background-color: rgba(216, 79, 129, 0.1);">@Patrian Party of Labor</span> you have been gifted 4 imperial tons of potatoes. in a passive aggressive measure by the LEG in front of your orphanage.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/9e29996d4223766eb9f666e447f90299-7A9B7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daddy Lenin#8006" data-user-id="523686386025627668" style="">Daddy Lenin</span>
+
+
+        <span class="chatlog__timestamp">06-Jan-21 07:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="796576049201807420" id="message-796576049201807420">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Your Friend Tamara#5922">@Your Friend Tamara</span> vote to give the potatoes to those who need them?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/ab916f10c5c25a8d9529add798faedec-7E107.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="unascended banana#1355" data-user-id="358618409002467329" style="">unascended banana</span>
+
+
+        <span class="chatlog__timestamp">06-Jan-21 07:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="796576088380801074" id="message-796576088380801074">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Lmao</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/9e29996d4223766eb9f666e447f90299-7A9B7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daddy Lenin#8006" data-user-id="523686386025627668" style="">Daddy Lenin</span>
+
+
+        <span class="chatlog__timestamp">06-Jan-21 07:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="796576243121913906" id="message-796576243121913906">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img class="emoji emoji--large" alt="😎" title="😎" src="https://twemoji.maxcdn.com/2/72x72/1f60e.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="796576271525478431" id="message-796576271525478431">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">We don&#39;t need these potatoes</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">06-Jan-21 07:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="796576962327216128" id="message-796576962327216128">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Yes.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="796576988282224661" id="message-796576988282224661">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Donate the potatoes</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="796577082913587210" id="message-796577082913587210">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="unascended banana#1355">@unascended banana</span> join <a href="https://discord.gg/WQpBgtZb">https://discord.gg/WQpBgtZb</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="patrian-party-of-labor.html_Files/c386e9c58db72f8189f02551186fddb6-5D8A7.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="Dieselkeough#5676" style="">Dieselkeough</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;796575685514231828&#39;)">
+                    <span class="chatlog__reference-content">
+<span class="mention" style="color: rgb(216, 79, 129); background-color: rgba(216, 79, 129, 0.1);">@Patrian Party of Labor</span> you have been gifted 4 imperial tons of potatoes. in a passive aggressive measure by the LEG in front of your orphanage.                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/b749c6aa79b5dcd9eec67d8eee88e7af-F782D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ultrackius (it/its)#1126" data-user-id="430401037380354059" style="color: rgb(216,79,129)">Sen. Empharius</span>
+
+
+        <span class="chatlog__timestamp">06-Jan-21 07:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="796577249134510151" id="message-796577249134510151">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">who&#39;s the LEG again?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/c386e9c58db72f8189f02551186fddb6-5D8A7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dieselkeough#5676" data-user-id="219570630448775170" style="">Dieselkeough</span>
+
+
+        <span class="chatlog__timestamp">06-Jan-21 07:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="796577299884539914" id="message-796577299884539914">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">the french soundfing one</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/b749c6aa79b5dcd9eec67d8eee88e7af-F782D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ultrackius (it/its)#1126" data-user-id="430401037380354059" style="color: rgb(216,79,129)">Sen. Empharius</span>
+
+
+        <span class="chatlog__timestamp">06-Jan-21 07:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="796579743062294549" id="message-796579743062294549">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ah</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="796579762607882242" id="message-796579762607882242">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">the psuedo fash</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">07-Jan-21 10:46 AM</span>
+
+            <div class="chatlog__message " data-message-id="796811968798261248" id="message-796811968798261248">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="unascended banana#1355">@unascended banana</span> If you are gonna be a part of the party you gotta join this:
+ <a href="https://discord.gg/WQpBgtZb">https://discord.gg/WQpBgtZb</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/ab916f10c5c25a8d9529add798faedec-7E107.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="unascended banana#1355" data-user-id="358618409002467329" style="">unascended banana</span>
+
+
+        <span class="chatlog__timestamp">07-Jan-21 10:47 AM</span>
+
+            <div class="chatlog__message " data-message-id="796812176756310126" id="message-796812176756310126">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">That’s fair <s>dang I’m used to being the one sending the invite</s>. I think I’m actually going to leave this server instead though</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">07-Jan-21 10:48 AM</span>
+
+            <div class="chatlog__message " data-message-id="796812480135430164" id="message-796812480135430164">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ohokay</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/9e29996d4223766eb9f666e447f90299-7A9B7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daddy Lenin#8006" data-user-id="523686386025627668" style="">Daddy Lenin</span>
+
+
+        <span class="chatlog__timestamp">08-Jan-21 08:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="797137726657921064" id="message-797137726657921064">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <video controls class="chatlog__attachment-thumbnail">
+                                        <source src="patrian-party-of-labor.html_Files/The_Sacred_War-C32DF.mp4" alt="Video attachment" title="Video: The_Sacred_War.mp4 (2.14 MB)">
+                                    </video>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="797138063620702240" id="message-797138063620702240">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <video controls class="chatlog__attachment-thumbnail">
+                                        <source src="patrian-party-of-labor.html_Files/Liberation-3D1C5.mp4" alt="Video attachment" title="Video: Liberation.mp4 (7.06 MB)">
+                                    </video>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="patrian-party-of-labor.html_Files/9e29996d4223766eb9f666e447f90299-7A9B7.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="Daddy Lenin#8006" style="">Daddy Lenin</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;797137726657921064&#39;)">
+                    <span class="chatlog__reference-content">
+                            <em>Click to see original message</em>
+                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/35b9581e58690354e7ede274fb4f4b4d-6F88D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Arksiane#0142" data-user-id="203781815964532736" style="color: rgb(92,95,255)">Arksiane</span>
+
+
+        <span class="chatlog__timestamp">08-Jan-21 08:45 AM</span>
+
+            <div class="chatlog__message " data-message-id="797143962778861578" id="message-797143962778861578">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img class="emoji emoji--large" alt="untroll" title="untroll" src="https://cdn.discordapp.com/emojis/745528143607234563.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="797143977160998942" id="message-797143977160998942">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">you made this?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="797144111567994920" id="message-797144111567994920">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">also
+&gt;red flower on black background
+schadenfreude</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-Jan-21 08:46 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/9e29996d4223766eb9f666e447f90299-7A9B7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daddy Lenin#8006" data-user-id="523686386025627668" style="">Daddy Lenin</span>
+
+
+        <span class="chatlog__timestamp">08-Jan-21 08:48 AM</span>
+
+            <div class="chatlog__message " data-message-id="797144676872093766" id="message-797144676872093766">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Arksiane#0142">@Arksiane</span> hey ita better propaganda than anyone else is making-</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="797144721868324876" id="message-797144721868324876">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Also yes-</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="patrian-party-of-labor.html_Files/35b9581e58690354e7ede274fb4f4b4d-6F88D.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="Arksiane#0142" style="color: rgb(92,95,255)">Arksiane</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;797144111567994920&#39;)">
+                    <span class="chatlog__reference-content">
+also
+&gt;red flower on black background
+schadenfreude                    </span>
+
+                        <span class="chatlog__reference-edited-timestamp" title="08-Jan-21 08:46 AM">(edited)</span>
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/ac7c54c0929c33ade1d501e68c4775e9-81738.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cbass#6969" data-user-id="415660414651596800" style="">cbass</span>
+
+
+        <span class="chatlog__timestamp">08-Jan-21 10:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="797162842674561025" id="message-797162842674561025">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">fuck does schadenfreude mean??</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="797162855786741771" id="message-797162855786741771">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i can&#39;t remember</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="patrian-party-of-labor.html_Files/9e29996d4223766eb9f666e447f90299-7A9B7.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="Daddy Lenin#8006" style="">Daddy Lenin</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;797137726657921064&#39;)">
+                    <span class="chatlog__reference-content">
+                            <em>Click to see original message</em>
+                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/ac7c54c0929c33ade1d501e68c4775e9-81738.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cbass#6969" data-user-id="415660414651596800" style="">cbass</span>
+
+
+        <span class="chatlog__timestamp">08-Jan-21 10:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="797162902661365851" id="message-797162902661365851">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">0/10 anti-cultist</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="patrian-party-of-labor.html_Files/ac7c54c0929c33ade1d501e68c4775e9-81738.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="cbass#6969" style="">cbass</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;797162842674561025&#39;)">
+                    <span class="chatlog__reference-content">
+fuck does schadenfreude mean??                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/35b9581e58690354e7ede274fb4f4b4d-6F88D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Arksiane#0142" data-user-id="203781815964532736" style="color: rgb(92,95,255)">Arksiane</span>
+
+
+        <span class="chatlog__timestamp">08-Jan-21 10:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="797162956722012210" id="message-797162956722012210">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">nothing important</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="797163004416098335" id="message-797163004416098335">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">use it for any situation, you think they know what it means?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/ac7c54c0929c33ade1d501e68c4775e9-81738.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cbass#6969" data-user-id="415660414651596800" style="">cbass</span>
+
+
+        <span class="chatlog__timestamp">08-Jan-21 10:01 AM</span>
+
+            <div class="chatlog__message " data-message-id="797163053719224320" id="message-797163053719224320">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">no it means something</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="797163067334459433" id="message-797163067334459433">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i can&#39;t fucking remember</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-Jan-21 10:01 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="797163118325137489" id="message-797163118325137489">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i think it means when you think someone else&#39;s pain is funny</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="797163163871215636" id="message-797163163871215636">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="quote">pleasure derived by someone from another person&#39;s misfortune.</div></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="797163167955681320" id="message-797163167955681320">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">yeah</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/9e29996d4223766eb9f666e447f90299-7A9B7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daddy Lenin#8006" data-user-id="523686386025627668" style="">Daddy Lenin</span>
+
+
+        <span class="chatlog__timestamp">08-Jan-21 10:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="797163449732956230" id="message-797163449732956230">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ima make my character soon.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">11-Jan-21 08:19 AM</span>
+
+            <div class="chatlog__message " data-message-id="798224572788113408" id="message-798224572788113408">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Coolz_Pickle#5267">@Coolz_Pickle</span> <span class="mention" title="metaltaco#0365">@metaltaco</span> <span class="mention" title="Not_A_Threat.25#6589">@Senator Michelle Evans</span> <a href="https://discord.gg/shzFVTXt">https://discord.gg/shzFVTXt</a> join.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/9e29996d4223766eb9f666e447f90299-7A9B7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daddy Lenin#8006" data-user-id="523686386025627668" style="">Daddy Lenin</span>
+
+
+        <span class="chatlog__timestamp">11-Jan-21 01:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="798305062165151774" id="message-798305062165151774">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>the man walked in, and sat in the party&#39;s propaganda room. He began thinking of various designs. Sketching them. Throwing most of them out.</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/6eb4ea1637daa85dc5ea227be58ee14e-7196D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Balisticflame#2673" data-user-id="388521623176740887" style="color: rgb(216,79,129)">Sen. Cassandra Balistic</span>
+
+
+        <span class="chatlog__timestamp">13-Jan-21 03:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="799061249886650378" id="message-799061249886650378">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Tamara made me leader when she left so I need the party head role</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="799061301158608976" id="message-799061301158608976">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" style="color: rgb(92, 95, 255); background-color: rgba(92, 95, 255, 0.1);">@Moderator</span></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/35b9581e58690354e7ede274fb4f4b4d-6F88D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Arksiane#0142" data-user-id="203781815964532736" style="color: rgb(92,95,255)">Arksiane</span>
+
+
+        <span class="chatlog__timestamp">13-Jan-21 10:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="799158951492190269" id="message-799158951492190269">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">done</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/c386e9c58db72f8189f02551186fddb6-5D8A7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dieselkeough#5676" data-user-id="219570630448775170" style="">Dieselkeough</span>
+
+
+        <span class="chatlog__timestamp">13-Jan-21 10:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="799159308796952628" id="message-799159308796952628">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">tamara is already back</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="799159342891925524" id="message-799159342891925524">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">so i am taking the head role away again</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/c386e9c58db72f8189f02551186fddb6-5D8A7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dieselkeough#5676" data-user-id="219570630448775170" style="">Dieselkeough</span>
+
+
+        <span class="chatlog__timestamp">17-Jan-21 08:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="800581069728251934" id="message-800581069728251934">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" style="color: rgb(216, 79, 129); background-color: rgba(216, 79, 129, 0.1);">@Patrian Party of Labor</span> yout balance is 925000</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/9e29996d4223766eb9f666e447f90299-7A9B7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daddy Lenin#8006" data-user-id="523686386025627668" style="">Daddy Lenin</span>
+
+
+        <span class="chatlog__timestamp">17-Jan-21 08:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="800581282403844116" id="message-800581282403844116">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img class="emoji emoji--large" alt="pog" title="pog" src="https://cdn.discordapp.com/emojis/718560473397854209.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/c386e9c58db72f8189f02551186fddb6-5D8A7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dieselkeough#5676" data-user-id="219570630448775170" style="">Dieselkeough</span>
+
+
+        <span class="chatlog__timestamp">17-Jan-21 10:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="800613819252080641" id="message-800613819252080641">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">btw yall have a loan for 1.45 million to pay</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="800613905374117928" id="message-800613905374117928">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">wait</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="800613911019651073" id="message-800613911019651073">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">no</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="800613927837761546" id="message-800613927837761546">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">1.045</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="800613934309703690" id="message-800613934309703690">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">yeah</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/b749c6aa79b5dcd9eec67d8eee88e7af-F782D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ultrackius (it/its)#1126" data-user-id="430401037380354059" style="color: rgb(216,79,129)">Sen. Empharius</span>
+
+
+        <span class="chatlog__timestamp">17-Jan-21 11:19 PM</span>
+
+            <div class="chatlog__message " data-message-id="800625321689743420" id="message-800625321689743420">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ah</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">27-Jan-21 03:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="804136955419295754" id="message-804136955419295754">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://discord.gg/22QctRxCfz">https://discord.gg/22QctRxCfz</a> join this.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/c386e9c58db72f8189f02551186fddb6-5D8A7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dieselkeough#5676" data-user-id="219570630448775170" style="">Dieselkeough</span>
+
+
+        <span class="chatlog__timestamp">31-Jan-21 11:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="805707589820088360" id="message-805707589820088360">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" style="color: rgb(216, 79, 129); background-color: rgba(216, 79, 129, 0.1);">@Patrian Party of Labor</span> yall got a new member</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/c2bd38877cd57f2c4373194a174d894c-41772.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="lumpen#7553" data-user-id="688033106560548893" style="color: rgb(216,79,129)">lumpen</span>
+
+
+        <span class="chatlog__timestamp">31-Jan-21 11:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="805707629212205076" id="message-805707629212205076">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Good evening cracker jacks</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/9e29996d4223766eb9f666e447f90299-7A9B7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daddy Lenin#8006" data-user-id="523686386025627668" style="">Daddy Lenin</span>
+
+
+        <span class="chatlog__timestamp">01-Feb-21 04:26 AM</span>
+
+            <div class="chatlog__message " data-message-id="805776006488784897" id="message-805776006488784897">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/6eb4ea1637daa85dc5ea227be58ee14e-7196D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Balisticflame#2673" data-user-id="388521623176740887" style="color: rgb(216,79,129)">Sen. Cassandra Balistic</span>
+
+
+        <span class="chatlog__timestamp">01-Feb-21 05:05 AM</span>
+
+            <div class="chatlog__message " data-message-id="805785887249793044" id="message-805785887249793044">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">amazing</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/ffe8b13bc41072595f5537f7bc00e533-54A81.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="metaltaco#0365" data-user-id="463571295712444416" style="">metaltaco</span>
+
+
+        <span class="chatlog__timestamp">01-Feb-21 05:50 AM</span>
+
+            <div class="chatlog__message " data-message-id="805797215754780683" id="message-805797215754780683">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I agree totally</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="Your Friend Tamara#5922" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;804136955419295754&#39;)">
+                    <span class="chatlog__reference-content">
+<a href="https://discord.gg/22QctRxCfz">https://discord.gg/22QctRxCfz</a> join this.                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Your Friend Tamara#5922" data-user-id="512699861314043907" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+
+
+        <span class="chatlog__timestamp">01-Feb-21 06:28 AM</span>
+
+            <div class="chatlog__message " data-message-id="805806735821766657" id="message-805806735821766657">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="KeyJoard249Russia#9500">@KeyJoard249Russia</span> <span class="mention" title="flavman#6261">@flavman</span> <span class="mention" title="Coolz_Pickle#5267">@Coolz_Pickle</span></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="patrian-party-of-labor.html_Files/228215678b9e82ab5942ccf7f4fc7cd2-3F75B.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="Your Friend Tamara#5922" style="color: rgb(216,79,129)">Your Friend Tamara</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;805806735821766657&#39;)">
+                    <span class="chatlog__reference-content">
+<span class="mention" title="KeyJoard249Russia#9500">@KeyJoard249Russia</span> <span class="mention" title="flavman#6261">@flavman</span> <span class="mention" title="Coolz_Pickle#5267">@Coolz_Pickle</span>                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/074f395d8caf8b4563a73135f4bd3e25-79843.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="KeyJoard249Russia#9500" data-user-id="792754712822808596" style="color: rgb(216,79,129)">KeyJoard249Russia</span>
+
+
+        <span class="chatlog__timestamp">01-Feb-21 04:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="805950652139831396" id="message-805950652139831396">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Huh?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/6eb4ea1637daa85dc5ea227be58ee14e-7196D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Balisticflame#2673" data-user-id="388521623176740887" style="color: rgb(216,79,129)">Sen. Cassandra Balistic</span>
+
+
+        <span class="chatlog__timestamp">02-Feb-21 05:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="806328239634382898" id="message-806328239634382898">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">im party head now bithcesss</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/9e29996d4223766eb9f666e447f90299-7A9B7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daddy Lenin#8006" data-user-id="523686386025627668" style="">Daddy Lenin</span>
+
+
+        <span class="chatlog__timestamp">02-Feb-21 11:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="806424338076008448" id="message-806424338076008448">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img class="emoji emoji--large" alt="Realization" title="Realization" src="https://cdn.discordapp.com/emojis/799469648001237023.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="806424376471060480" id="message-806424376471060480">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;m gonna get purged now</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/15b7306924ed7dbdf53b2432634214b2-B35AF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="HospitallerBoi#6656" data-user-id="502550243364175883" style="">HospitallerBoi</span>
+
+
+        <span class="chatlog__timestamp">09-Feb-21 01:57 AM</span>
+
+            <div class="chatlog__message " data-message-id="808637680627089458" id="message-808637680627089458">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Hello</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="808637694225678336" id="message-808637694225678336">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">...</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="808637713702977538" id="message-808637713702977538">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://tenor.com/view/rip-chat-chat-dead-dead-chat-inactive-gif-18754855">https://tenor.com/view/rip-chat-chat-dead-dead-chat-inactive-gif-18754855</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="patrian-party-of-labor.html_Files/tenor-F88AC.png">
+                                            <img class="chatlog__embed-thumbnail" src="patrian-party-of-labor.html_Files/tenor-F88AC.png" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="patrian-party-of-labor.html_Files/35b9581e58690354e7ede274fb4f4b4d-6F88D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Arksiane#0142" data-user-id="203781815964532736" style="color: rgb(92,95,255)">Arksiane</span>
+
+
+        <span class="chatlog__timestamp">09-Feb-21 01:59 AM</span>
+
+            <div class="chatlog__message " data-message-id="808638107431337984" id="message-808638107431337984">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://tenor.com/view/dead-chat-xd-gif-19206088">https://tenor.com/view/dead-chat-xd-gif-19206088</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="patrian-party-of-labor.html_Files/tenor-B8B7F.png">
+                                            <img class="chatlog__embed-thumbnail" src="patrian-party-of-labor.html_Files/tenor-B8B7F.png" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 90 message(s)</div>
+</div>
+
+</body>
+
+</html>
